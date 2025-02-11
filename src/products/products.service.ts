@@ -1,12 +1,14 @@
 import {
   ConflictException,
   Injectable,
+  InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
+import internal from 'stream';
 
 @Injectable()
 export class ProductsService {
@@ -24,6 +26,7 @@ export class ProductsService {
           );
         }
       }
+      throw new InternalServerErrorException();
     }
   }
 
